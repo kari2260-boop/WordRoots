@@ -227,7 +227,7 @@ export default function DrKConfigPage() {
                 <Save size={16} className="mr-1" />
                 保存
               </Button>
-              <Button variant="outline" onClick={handleCancel}>
+              <Button variant="secondary" onClick={handleCancel}>
                 <X size={16} className="mr-1" />
                 取消
               </Button>
@@ -272,7 +272,7 @@ export default function DrKConfigPage() {
                     <Save size={16} className="mr-1" />
                     保存
                   </Button>
-                  <Button variant="outline" onClick={handleCancel}>
+                  <Button variant="secondary" onClick={handleCancel}>
                     <X size={16} className="mr-1" />
                     取消
                   </Button>
@@ -299,13 +299,13 @@ export default function DrKConfigPage() {
                     </div>
                   </div>
                   <div className="flex gap-2">
-                    <Button size="sm" variant="outline" onClick={() => handleEdit(item)}>
+                    <Button size="sm" variant="secondary" onClick={() => handleEdit(item)}>
                       <Edit size={14} className="mr-1" />
                       编辑
                     </Button>
                     <Button
                       size="sm"
-                      variant="outline"
+                      variant="danger"
                       onClick={() => handleDelete(item.id)}
                     >
                       <Trash2 size={14} className="mr-1" />
