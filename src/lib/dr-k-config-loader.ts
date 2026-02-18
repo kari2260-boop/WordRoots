@@ -1,7 +1,40 @@
 import { supabaseAdmin } from '@/lib/supabase/admin'
 
+interface DrKKnowledge {
+  id: string
+  title: string
+  content: string
+  topic?: string
+  is_active: boolean
+  order_index: number
+}
+
+interface DrKScenario {
+  id: string
+  title: string
+  prompt: string
+  scenario_name?: string
+  is_active: boolean
+  order_index: number
+}
+
+interface DrKPrompt {
+  id: string
+  title: string
+  content: string
+  category?: string
+  is_active: boolean
+  order_index: number
+}
+
+interface DrKConfig {
+  knowledge: DrKKnowledge[]
+  scenarios: DrKScenario[]
+  prompts: DrKPrompt[]
+}
+
 // 从数据库加载 K博士配置
-export async function loadDrKConfig() {
+export async function loadDrKConfig(): Promise<DrKConfig> {
   try {
     // 获取知识库
     const { data: knowledge } = await supabaseAdmin
