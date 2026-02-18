@@ -21,7 +21,7 @@ export async function GET(request: Request) {
     }
 
     // Get profiles separately
-    const userIds = [...new Set(works?.map((w: any) => w.user_id).filter(Boolean))]
+    const userIds = [...new Set<string>(works?.map((w: any) => w.user_id).filter(Boolean))]
     const { data: profiles } = await supabaseAdmin
       .from('profiles')
       .select('id, nickname, age, grade')

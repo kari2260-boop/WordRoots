@@ -77,7 +77,7 @@ export default function WorksPage() {
           </Card>
           <Card className="text-center">
             <div className="text-2xl font-bold text-blue-600">
-              {new Set((works as any[]).flatMap((w: any) => w.tags || [])).size}
+              {new Set<string>((works as any[]).flatMap((w: any) => w.tags || [])).size}
             </div>
             <div className="text-xs text-gray-600 mt-1">涉及领域</div>
           </Card>

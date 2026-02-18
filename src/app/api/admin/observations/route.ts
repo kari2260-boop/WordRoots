@@ -47,7 +47,7 @@ export async function GET(request: Request) {
 
     // Get profiles for all user_ids
     if (observations && observations.length > 0) {
-      const userIds = [...new Set(observations.map((o: any) => o.user_id).filter(Boolean))]
+      const userIds = [...new Set<string>(observations.map((o: any) => o.user_id).filter(Boolean))]
       console.log(`📋 Fetching profiles for ${userIds.length} users`)
 
       const { data: profiles } = await supabaseAdmin

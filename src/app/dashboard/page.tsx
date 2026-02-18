@@ -48,7 +48,7 @@ export default async function DashboardPage() {
     .eq('user_id', user.id)
     .eq('status', 'completed')
 
-  const completedTaskIds = new Set((completedTasks as any[])?.map((t: any) => t.task_id) || [])
+  const completedTaskIds = new Set<string>((completedTasks as any[])?.map((t: any) => t.task_id) || [])
 
   console.log('Dashboard - Completed tasks:', completedTasks?.length || 0)
 

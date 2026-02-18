@@ -34,7 +34,7 @@ export default async function CouncilPage() {
     .select('mentor_id')
     .eq('user_id', user.id)
 
-  const unlockedIds = new Set((unlockedMentors as any[])?.map((u: any) => u.mentor_id) || [])
+  const unlockedIds = new Set<string>((unlockedMentors as any[])?.map((u: any) => u.mentor_id) || [])
 
   // Get completed tasks
   const { data: completedTasks } = await supabase
