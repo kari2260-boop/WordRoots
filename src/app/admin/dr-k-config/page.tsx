@@ -132,21 +132,21 @@ export default function DrKConfigPage() {
       {/* Tabs */}
       <div className="flex gap-2">
         <Button
-          variant={activeTab === 'knowledge' ? 'primary' : 'outline'}
+          variant={activeTab === 'knowledge' ? 'primary' : 'secondary'}
           size="sm"
           onClick={() => setActiveTab('knowledge')}
         >
           知识库
         </Button>
         <Button
-          variant={activeTab === 'scenario' ? 'primary' : 'outline'}
+          variant={activeTab === 'scenario' ? 'primary' : 'secondary'}
           size="sm"
           onClick={() => setActiveTab('scenario')}
         >
           场景提示词
         </Button>
         <Button
-          variant={activeTab === 'prompt' ? 'primary' : 'outline'}
+          variant={activeTab === 'prompt' ? 'primary' : 'secondary'}
           size="sm"
           onClick={() => setActiveTab('prompt')}
         >
