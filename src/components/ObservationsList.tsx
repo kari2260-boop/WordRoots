@@ -56,7 +56,7 @@ export function ObservationsList() {
           console.log(`🆕 Found ${newIds.size} new observations since last visit`)
         } else {
           // First time viewing - mark all as new
-          const allIds = new Set(result.observations.map((obs: any) => obs.id))
+          const allIds = new Set<string>(result.observations.map((obs: any) => obs.id))
           setNewObservationIds(allIds)
           console.log(`🆕 First time viewing, marking all ${allIds.size} as new`)
         }
