@@ -56,7 +56,7 @@ export function WorksFeedbackList() {
           console.log(`🆕 Found ${newIds.size} new feedback since last visit`)
         } else {
           // First time viewing - mark all as new
-          const allIds = new Set(approvedWorks.map((work: any) => work.id))
+          const allIds = new Set<string>(approvedWorks.map((work: any) => work.id))
           setNewWorkIds(allIds)
         }
 
