@@ -18,7 +18,7 @@ export default async function TasksPage() {
     .eq('user_id', user.id)
     .eq('status', 'completed')
 
-  const completedTaskIds = new Set<string>((completedTasks as any[])?.map((t: any) => t.task_id) || [])
+  const completedTaskIds = new Set<number>((completedTasks as any[])?.map((t: any) => t.task_id) || [])
 
   // Separate tasks into completed and available
   const availableTasks = TASKS.filter(task => !completedTaskIds.has(task.id))
