@@ -16,7 +16,7 @@ export async function POST(request: Request) {
     const { data } = body
 
     // Update profile using admin client
-    await supabaseAdmin
+    await (supabaseAdmin as any)
       .from('profiles')
       .update({
         age: data.basicInfo.age,
@@ -27,7 +27,7 @@ export async function POST(request: Request) {
       .eq('id', user.id)
 
     // Insert assessment
-    const { data: assessment, error: assessmentError } = await supabaseAdmin
+    const { data: assessment, error: assessmentError } = await (supabaseAdmin as any)
       .from('assessments')
       .insert({
         user_id: user.id,
@@ -92,7 +92,7 @@ export async function POST(request: Request) {
       goals.push({ user_id: user.id, type: 'short_term', content: data.goals.goals_this_year })
     }
     if (goals.length > 0) {
-      await supabaseAdmin.from('user_goals').insert(goals)
+      await (supabaseAdmin as any).from('user_goals').insert(goals)
     }
 
     return NextResponse.json({

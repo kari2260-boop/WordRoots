@@ -23,7 +23,7 @@ export async function POST(request: Request) {
     }
 
     // Insert user_task using admin client
-    const { data: taskData, error: taskError } = await supabaseAdmin
+    const { data: taskData, error: taskError } = await (supabaseAdmin as any)
       .from('user_tasks')
       .insert({
         user_id: user.id,
@@ -40,7 +40,7 @@ export async function POST(request: Request) {
     }
 
     // Insert work using admin client
-    const { data: workData, error: workError } = await supabaseAdmin
+    const { data: workData, error: workError } = await (supabaseAdmin as any)
       .from('works')
       .insert({
         user_id: user.id,

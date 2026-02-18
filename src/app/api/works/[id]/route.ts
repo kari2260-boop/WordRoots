@@ -30,7 +30,7 @@ export async function POST(
       .from('works')
       .select('id, user_id, task_id, version, parent_work_id')
       .eq('id', params.id)
-      .single()
+      .single() as { data: any, error: any }
 
     if (originalError || !originalWork) {
       return NextResponse.json({ error: 'Original work not found' }, { status: 404 })
@@ -50,12 +50,12 @@ export async function POST(
       .or(`id.eq.${rootWorkId},parent_work_id.eq.${rootWorkId}`)
       .order('version', { ascending: false })
       .limit(1)
-      .single()
+      .single() as { data: { version: number } | null }
 
     const newVersion = (latestVersion?.version || 1) + 1
 
     // Insert new version
-    const { data: newWork, error: insertError } = await supabaseAdmin
+    const { data: newWork, error: insertError } = await (supabaseAdmin as any)
       .from('works')
       .insert({
         user_id: user.id,
@@ -107,7 +107,7 @@ export async function GET(
       .select('id, user_id, task_id, title, description, reflection, link, tags, created_at, version, parent_work_id')
       .eq('id', params.id)
       .eq('user_id', user.id) // Ensure user can only view their own works
-      .single()
+      .single() as { data: any, error: any }
 
     if (workError) {
       console.error('Work fetch error:', workError)
@@ -119,7 +119,7 @@ export async function GET(
     }
 
     // Get user_tasks data for this work
-    const { data: userTasks, error: tasksError } = await supabaseAdmin
+    const { data: userTasks, error: tasksError } = await (supabaseAdmin as any)
       .from('user_tasks')
       .select('status, points_earned, feedback, completed_at')
       .eq('user_id', work.user_id)

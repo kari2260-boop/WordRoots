@@ -145,7 +145,7 @@ export default function WorkDetailPage() {
 
         <Button
           onClick={() => setShowNewVersionForm(!showNewVersionForm)}
-          variant="outline"
+          variant="secondary"
           size="sm"
         >
           <Plus size={16} className="mr-1" />
@@ -228,7 +228,7 @@ export default function WorkDetailPage() {
               </Button>
               <Button
                 type="button"
-                variant="outline"
+                variant="secondary"
                 onClick={() => setShowNewVersionForm(false)}
               >
                 取消

@@ -64,7 +64,7 @@ export default function LoginPage() {
           .from('profiles')
           .select('onboarding_completed')
           .eq('id', data.user.id)
-          .single()
+          .single() as { data: { onboarding_completed: boolean } | null, error: any }
 
         console.log('Profile:', profile, 'Error:', profileError)
 
@@ -211,7 +211,8 @@ export default function LoginPage() {
           )}
         </div>
 
-        <Card id="login-form">
+        <Card>
+          <div id="login-form">
           {mode !== 'reset' && (
             <div className="flex gap-2 mb-6">
               <Button
@@ -340,6 +341,7 @@ export default function LoginPage() {
               </button>
             )}
           </form>
+          </div>
         </Card>
       </div>
     </div>

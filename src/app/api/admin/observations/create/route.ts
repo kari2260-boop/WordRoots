@@ -20,29 +20,31 @@ export async function POST(request: Request) {
       .from('profiles')
       .select('id')
       .limit(1)
-      .single()
+      .single() as { data: { id: string } | null, error: any }
 
-    console.log('🔍 [Create Observation] First user:', firstUser?.id, 'Error:', userError)
+    console.log('🔍 [Create Observation] First user found:', !!firstUser, 'Error:', userError)
 
     if (!firstUser) {
       return NextResponse.json({ error: 'No users found in system' }, { status: 500 })
     }
 
+    const observerId = firstUser.id
+
     // Insert observation using admin client
     console.log('🔍 [Create Observation] Inserting with data:', {
       user_id: student_id,
-      observer_id: firstUser.id,
+      observer_id: observerId,
       title,
       category: category || null,
       observation,
       suggested_tags: suggested_tags || null,
     })
 
-    const { data: observationData, error: insertError } = await supabaseAdmin
+    const { data: observationData, error: insertError } = await (supabaseAdmin as any)
       .from('observations')
       .insert({
         user_id: student_id,
-        observer_id: firstUser.id, // Use first user as placeholder for admin
+        observer_id: observerId, // Use first user as placeholder for admin
         title: title,
         category: category || null,
         observation: observation,

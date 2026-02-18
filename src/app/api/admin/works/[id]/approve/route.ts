@@ -20,7 +20,7 @@ export async function POST(
       .from('works')
       .select('id, user_id, task_id, title')
       .eq('id', params.id)
-      .single()
+      .single() as { data: { id: string, user_id: string, task_id: string, title: string } | null, error: any }
 
     console.log('🔍 [Approve Work] Work found:', work, 'Error:', workError)
 
@@ -29,7 +29,7 @@ export async function POST(
     }
 
     // First, check if user_tasks record exists
-    const { data: existingTask } = await supabaseAdmin
+    const { data: existingTask } = await (supabaseAdmin as any)
       .from('user_tasks')
       .select('id, user_id, task_id, status')
       .eq('user_id', work.user_id)
@@ -40,7 +40,7 @@ export async function POST(
 
     if (existingTask) {
       // Update existing task status
-      const { data: updatedTask, error: updateError } = await supabaseAdmin
+      const { data: updatedTask, error: updateError } = await (supabaseAdmin as any)
         .from('user_tasks')
         .update({
           status: status || 'completed',
@@ -57,7 +57,7 @@ export async function POST(
       }
     } else {
       // Create user_tasks record if it doesn't exist
-      const { error: insertError } = await supabaseAdmin
+      const { error: insertError } = await (supabaseAdmin as any)
         .from('user_tasks')
         .insert({
           user_id: work.user_id,
@@ -80,9 +80,9 @@ export async function POST(
       .from('works')
       .select('tags')
       .eq('id', params.id)
-      .single()
+      .single() as { data: { tags: string[] } | null, error: any }
 
-    console.log('🔍 [Approve Work] Current work tags:', currentWork?.tags)
+    console.log('🔍 [Approve Work] Current work found:', !!currentWork)
 
     const metadataTags = []
     if (feedback) {
@@ -101,7 +101,7 @@ export async function POST(
     const newTags = [...existingTags, ...metadataTags]
     console.log('🔍 [Approve Work] New tags to save:', newTags)
 
-    const { data: updatedWork, error: workUpdateError } = await supabaseAdmin
+    const { data: updatedWork, error: workUpdateError } = await (supabaseAdmin as any)
       .from('works')
       .update({
         tags: newTags
@@ -116,13 +116,13 @@ export async function POST(
       .from('profiles')
       .select('total_points')
       .eq('id', work.user_id)
-      .single()
+      .single() as { data: { total_points: number } | null, error: any }
 
-    console.log('🔍 [Approve Work] Current profile points:', profile?.total_points)
+    console.log('🔍 [Approve Work] Profile found:', !!profile)
 
     if (!profileError && profile) {
       const newPoints = (profile.total_points || 0) + points
-      const { error: pointsUpdateError } = await supabaseAdmin
+      const { error: pointsUpdateError } = await (supabaseAdmin as any)
         .from('profiles')
         .update({
           total_points: newPoints

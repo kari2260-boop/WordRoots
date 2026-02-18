@@ -71,21 +71,21 @@ export default function AdminWorksPage() {
       {/* Filter Tabs */}
       <div className="flex gap-2">
         <Button
-          variant={filter === 'all' ? 'primary' : 'outline'}
+          variant={filter === 'all' ? 'primary' : 'secondary'}
           size="sm"
           onClick={() => setFilter('all')}
         >
           全部 ({works.length})
         </Button>
         <Button
-          variant={filter === 'pending' ? 'primary' : 'outline'}
+          variant={filter === 'pending' ? 'primary' : 'secondary'}
           size="sm"
           onClick={() => setFilter('pending')}
         >
           待审核 ({pendingCount})
         </Button>
         <Button
-          variant={filter === 'approved' ? 'primary' : 'outline'}
+          variant={filter === 'approved' ? 'primary' : 'secondary'}
           size="sm"
           onClick={() => setFilter('approved')}
         >
@@ -116,7 +116,7 @@ export default function AdminWorksPage() {
                   </div>
                 </div>
                 <Link href={`/admin/works/${work.id}`}>
-                  <Button size="sm" variant="outline">
+                  <Button size="sm" variant="secondary">
                     <Eye size={16} className="mr-1" />
                     查看详情
                   </Button>

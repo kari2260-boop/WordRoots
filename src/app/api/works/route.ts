@@ -20,7 +20,7 @@ export async function GET(request: Request) {
       .from('works')
       .select('id, user_id, task_id, title, description, reflection, link, tags, created_at, version, parent_work_id')
       .eq('user_id', user.id)
-      .order('created_at', { ascending: false })
+      .order('created_at', { ascending: false }) as { data: any[] | null, error: any }
 
     if (worksError) {
       console.error('Works fetch error:', worksError)

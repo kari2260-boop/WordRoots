@@ -97,14 +97,14 @@ ${strengths && strengths.length > 0 ? `- 优势：${(strengths as any[]).map((s:
     const tags = extractTags(message, reply)
 
     // Save user message using admin client
-    await supabaseAdmin.from('chat_messages').insert({
+    await (supabaseAdmin as any).from('chat_messages').insert({
       user_id: user.id,
       role: 'user',
       content: message,
     })
 
     // Save assistant message using admin client
-    await supabaseAdmin.from('chat_messages').insert({
+    await (supabaseAdmin as any).from('chat_messages').insert({
       user_id: user.id,
       role: 'assistant',
       content: reply,

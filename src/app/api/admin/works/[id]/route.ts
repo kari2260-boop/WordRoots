@@ -19,7 +19,7 @@ export async function GET(
         )
       `)
       .eq('id', params.id)
-      .single()
+      .single() as { data: any, error: any }
 
     if (workError) {
       console.error('Work fetch error:', workError)
@@ -31,7 +31,7 @@ export async function GET(
     }
 
     // Get user_tasks data for this work
-    const { data: userTasks, error: tasksError } = await supabaseAdmin
+    const { data: userTasks, error: tasksError } = await (supabaseAdmin as any)
       .from('user_tasks')
       .select('status, points_earned, feedback, submitted_at')
       .eq('user_id', work.user_id)

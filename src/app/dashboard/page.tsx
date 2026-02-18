@@ -29,7 +29,7 @@ export default async function DashboardPage() {
     .eq('id', user.id)
     .single()
 
-  console.log('Dashboard - Profile:', profile?.id, 'total_points:', profile?.total_points, 'Error:', profileError)
+  console.log('Dashboard - Profile found:', !!profile, 'Error:', profileError)
 
   // If profile fetch fails, create a default profile object
   const profileData = profile || {

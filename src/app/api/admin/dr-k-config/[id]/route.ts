@@ -10,7 +10,7 @@ export async function PUT(
     const body = await request.json()
     const { type, title, content, topic, scenario_name, category, is_active, order_index } = body
 
-    let tableName = ''
+    let tableName: 'dr_k_knowledge' | 'dr_k_scenarios' | 'dr_k_prompts'
     let data: any = {
       title,
       content,
@@ -33,7 +33,7 @@ export async function PUT(
       return NextResponse.json({ error: 'Invalid type' }, { status: 400 })
     }
 
-    const { data: updatedItem, error } = await supabaseAdmin
+    const { data: updatedItem, error } = await (supabaseAdmin as any)
       .from(tableName)
       .update(data)
       .eq('id', params.id)
