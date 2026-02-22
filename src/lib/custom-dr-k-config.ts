@@ -171,6 +171,8 @@ export const CUSTOM_DR_K_CONFIG = {
 `,
 }
 
+
+
 // 导出完整的系统提示词生成函数
 export function buildSystemPrompt(userContext: string): string {
   return `${CUSTOM_DR_K_CONFIG.speakingStyle}
